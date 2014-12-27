@@ -1,0 +1,81 @@
+<!doctype html>
+<html ng-app="MyApp">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h1> Treinamento AngularJS - 2015</h1>
+        <div class="container" ng-controller="indexCtrl">
+            <form ng-submit="adicionarFuncionario()" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Filtro:</label>
+                    <div class="col-sm-10">
+                        <input type="search" class="form-control" ng-model="filtro"/>
+                    </div>
+                </div>
+            </form>
+            <button type="button" class="btn btn-success" ng-click="incluir = !incluir">Cadastrar</button>
+            <form class="form-horizontal" role="form" ng-show="incluir">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nome:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="aFuncionario.nome"/>
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Idade:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="aFuncionario.idade"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Profissão:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="aFuncionario.profissao"/>
+                    </div>
+                </div>
+               
+                <div>
+                    <button type="submit" ng-click="adicionarFuncionario()" class="btn btn-primary">Incluir</button>
+                    <button type="button" ng-click="limparDadosForm()" class="btn btn-primary">Limpar</button>
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <h3><th>Nome</th></h3>
+                            <h3><th>Idade</th></h3>
+                            <h3><th>Profissão</th></h3>
+                            <h3><th>Data Cadastro</th></h3>
+                            <h3><th>Editar</th></h3>
+                            <h3><th>Deletar</th></h3>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="funcionario in aCoFuncionarios | filter: filtro">
+                            <td>{{funcionario.nome | uppercase}}</td>
+                            <td>{{funcionario.idade}}</td>
+                            <td>{{funcionario.profissao}}</td>
+                            <td>{{funcionario.dataCadastro | date:'dd/MM/yyyy'}}</td>
+                            <td><button type="button" class="btn btn-info" ng-disabled="aAcoes.bloqueado" ng-click="alterarFuncionario(funcionario, $index)">Editar</button></td>
+                            <td><button type="button" class="btn btn-danger" ng-disabled="aAcoes.bloqueado" ng-click="removerFuncionario($index)"> Remover </button> </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                    	<tr ng-show="aAcoes.tbodyShow"> 
+	                    	<td><input type="text" class="form-control" ng-model="funcionario.nome"/></td>
+	                        <td><input type="text" class="form-control" ng-model="funcionario.idade"/></td>
+	                        <td><input type="text" class="form-control" ng-model="funcionario.profissao"/></td>
+	                        <td><button type="button" class="btn btn-info" ng-hide="aAcoes.btnShow" ng-click="salvarAlteracao()">Salvar Alteração</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
