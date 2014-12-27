@@ -2,6 +2,7 @@ angular.module('MyApp', [])
     .controller('indexCtrl', ['$scope', function($scope) {
  
             $scope.aCoFuncionarios = [];
+            $scope.aCoFuncionariosEdit = [];
  
             var Funcionario = function() {
                 var _nome = "";
@@ -13,11 +14,27 @@ angular.module('MyApp', [])
                     nome: _nome,
                     idade: _idade,
                     profissao: _profissao,
-                    dataCadastro: _dataCadastro,
+                    dataCadastro: _dataCadastro
                 }
             }
 
             $scope.aFuncionario = new Funcionario();
+
+            var FuncionarioEdt = function() {
+                var _nome = "";
+                var _idade = "";
+                var _profissao = "";
+                var _dataCadastro = new Date();
+ 
+                return {
+                    nome: _nome,
+                    idade: _idade,
+                    profissao: _profissao,
+                    dataCadastro: _dataCadastro
+                }
+            }
+
+            $scope.aFuncionarioEdt = new FuncionarioEdt();
 
             var Acoes = function () {
 
@@ -25,14 +42,12 @@ angular.module('MyApp', [])
             	var _tbodyShow = false;
             	var _bloqueado = false;
             	var _indexLinha = "";
-            	var _acoEdit = [];
 
             	return {
             		btnShow: _btnShow,
             		tbodyShow: _tbodyShow,
             		bloqueado: _bloqueado,
             		indexLinha: _indexLinha,
-            		acoEdit: _acoEdit
             	}
             }
  
@@ -56,7 +71,7 @@ angular.module('MyApp', [])
                 $scope.aAcoes.tbodyShow = true;
                 $scope.aAcoes.btnShow = false;
                 $scope.aAcoes.bloqueado = true;
-                $scope.aAcoes.acoEdit = funcionario;
+                $scope.aCoFuncionariosEdit = funcionario;
                 $scope.aAcoes.indexLinha = index;
             };
 
@@ -65,8 +80,9 @@ angular.module('MyApp', [])
             	$scope.aAcoes.btnShow = true;
             	$scope.aAcoes.bloqueado = false;
             	$scope.aCoFuncionarios.splice($scope.aAcoes.indexLinha, 1);
-            	// console.log($scope.aAcoes.acoEdit);
-            	$scope.aCoFuncionarios.push($scope.aAcoes.acoEdit);
+            	 console.log($scope.aCoFuncionariosEdit);
+            	 $scope.aCoFuncionarios.unshift($scope.aFuncionarioEdt);
+                 $scope.aFuncionarioEdt = new FuncionarioEdt();
                 // $scope.aCoFuncionarios.splice(index, 1);
             };
         }

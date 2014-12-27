@@ -5,7 +5,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     </head>
     <body>
-        <h1> Treinamento AngularJS - 2015</h1>
+        <h1 style="margin-left:35%;"> Apresentação AngularJS - 2015</h1>
+        <br/>
         <div class="container" ng-controller="indexCtrl">
             <form ng-submit="adicionarFuncionario()" class="form-horizontal" role="form">
                 <div class="form-group">
@@ -66,10 +67,10 @@
                     </tbody>
                     <tbody>
                     	<tr ng-show="aAcoes.tbodyShow"> 
-	                    	<td><input type="text" class="form-control" ng-model="funcionario.nome"/></td>
-	                        <td><input type="text" class="form-control" ng-model="funcionario.idade"/></td>
-	                        <td><input type="text" class="form-control" ng-model="funcionario.profissao"/></td>
-	                        <td><button type="button" class="btn btn-info" ng-hide="aAcoes.btnShow" ng-click="salvarAlteracao()">Salvar Alteração</button></td>
+	                    	<td><input type="text" class="form-control" ng-model="aFuncionarioEdt.nome"/></td>
+	                        <td><input type="text" class="form-control" ng-model="aFuncionarioEdt.idade"/></td>
+	                        <td><input type="text" class="form-control" ng-model="aFuncionarioEdt.profissao"/></td>
+	                        <td><button type="button" class="btn btn-success" ng-hide="aAcoes.btnShow" ng-click="salvarAlteracao()">Salvar Alteração</button></td>
                         </tr>
                     </tbody>
                 </table>
