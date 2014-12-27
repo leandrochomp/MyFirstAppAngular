@@ -1,4 +1,4 @@
 MyFirstAppAngular
 =================
 
-Primeiro app basico com CRUD de angular
+Primeiro app basico com CRUD de angular (utilizando arrays);
