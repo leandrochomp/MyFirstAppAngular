@@ -1,8 +1,7 @@
 angular.module('MyApp', [])
     .controller('indexCtrl', ['$scope', function($scope) {
- 
+            //Coleção de Funcionarios (linhas da GRID)
             $scope.aCoFuncionarios = [];
-            $scope.aCoFuncionariosEdit = [];
  
             var Funcionario = function() {
                 var _nome = "";
@@ -67,27 +66,39 @@ angular.module('MyApp', [])
             };
 
             $scope.alterarFuncionario = function(funcionario, index) {
-                console.log(funcionario);
                 $scope.aAcoes.tbodyShow = true;
                 $scope.aAcoes.btnShow = false;
                 $scope.aAcoes.bloqueado = true;
-                $scope.aCoFuncionariosEdit = funcionario;
                 $scope.aAcoes.indexLinha = index;
+
+                gravarLinha(funcionario)
+            };
+
+            var gravarLinha = function (funcionario){
+                    $scope.aFuncionarioEdt.nome = funcionario.nome;
+                    $scope.aFuncionarioEdt.idade = funcionario.idade;
+                    $scope.aFuncionarioEdt.profissao = funcionario.profissao;
             };
 
             $scope.salvarAlteracao = function() {
             	$scope.aAcoes.tbodyShow = false;
             	$scope.aAcoes.btnShow = true;
             	$scope.aAcoes.bloqueado = false;
+
             	$scope.aCoFuncionarios.splice($scope.aAcoes.indexLinha, 1);
-            	 console.log($scope.aCoFuncionariosEdit);
-            	 $scope.aCoFuncionarios.unshift($scope.aFuncionarioEdt);
-                 $scope.aFuncionarioEdt = new FuncionarioEdt();
-                // $scope.aCoFuncionarios.splice(index, 1);
+            	$scope.aCoFuncionarios.unshift($scope.aFuncionarioEdt);
+                $scope.aFuncionarioEdt = new FuncionarioEdt();
+            };
+
+            $scope.cancelarAlteracao = function() {
+                $scope.aFuncionarioEdt = new FuncionarioEdt();
+                $scope.aAcoes.tbodyShow = false;
+                $scope.aAcoes.bloqueado = false;
             };
         }
 ])
  
+ //diretiva que permite apenas numeros no input
     .directive('somenteNumeros', function () {
         return {
             require: '?ngModel',
